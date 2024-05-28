@@ -18,6 +18,10 @@ extends TileMap
 
 @export var randomMapSeed : int
 
+var CELL_SIZE = 16
+var CELL_SIZE_HALF = 8
+var CELL_SIZE_QUATER = 4
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -35,7 +39,9 @@ func _process(delta):
 	
 	
 func GenerateTerrain():
+	#通过噪声；来生成地图
 	var noise = FastNoiseLite.new()
+	#使用库自带的细胞噪声
 	noise.noise_type = FastNoiseLite.TYPE_CELLULAR
 	
 	var rng = RandomNumberGenerator.new()
@@ -71,11 +77,11 @@ func GenerateTerrain():
 	for num in range(rock_num):
 		var rock_x = randi_range(1,mapWidth - rockWidth)
 		var rock_y = randi_range(1,mapHeight - rockHeight)
-		print(str(rock_x) + "," + str(rock_y))
+		#print(str(rock_x) + "," + str(rock_y))
 		for x in range(rock_x,rock_x + rockWidth):
 			for y in range(rock_y,rock_y + rockHeight):
-				if get_cell_atlas_coords(0,Vector2i(x,y),false) == Vector2i(0,0):
-					print("rock on:" + str(x) + "," + str(y) )
+				if get_cell_atlas_coords(0,Vector2i(x,y),false) == Vector2i(0,0): #(0,0):草地图案
+					#print("rock on:" + str(x) + "," + str(y) )
 					set_cell(0,Vector2i(x,y),0,Vector2i(2,2))
 	
 		
