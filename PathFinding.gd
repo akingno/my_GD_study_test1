@@ -21,6 +21,8 @@ func _process(delta):
 		InitPathFinding()
 		RequstPath(start,end)
 		
+
+# 这个函数调用A*找路径，作微调，并绘制路径
 func RequstPath(start : Vector2i, end : Vector2i):
 	path = astar_grid.get_point_path(start,end)
 	
@@ -32,11 +34,12 @@ func RequstPath(start : Vector2i, end : Vector2i):
 	return path
 
 
-
+# 绘制路径
 func _draw():
 	if len(path) > 0:
 		for i in range(len(path)-1):
 			draw_line(path[i],path[i+1],Color.GRAY)
+
 			
 func InitPathFinding():
 	#A*算法的范围
