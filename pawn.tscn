@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c204b8lqsupff"]
+[gd_scene load_steps=5 format=3 uid="uid://c204b8lqsupff"]
 
 [ext_resource type="Script" path="res://Pawn.gd" id="1_bhoc4"]
 [ext_resource type="Texture2D" uid="uid://bftqal12iuj1m" path="res://sketch1.png" id="2_p6gsh"]
+[ext_resource type="Script" path="res://PownAI.gd" id="3_bkxs6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbhy5"]
 size = Vector2(16, 16)
@@ -15,3 +16,8 @@ texture = ExtResource("2_p6gsh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 8)
 shape = SubResource("RectangleShape2D_gbhy5")
+
+[node name="PownAI" type="Node" parent="."]
+script = ExtResource("3_bkxs6")
+nutrition_variable = 100
+hungery_line = 0.5

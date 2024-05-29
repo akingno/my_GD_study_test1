@@ -19,11 +19,11 @@ func _process(delta):
 	if calculate:
 		calculate = false
 		InitPathFinding()
-		RequstPath(start,end)
+		RequestPath(start,end)
 		
 
 # 这个函数调用A*找路径，作微调，并绘制路径
-func RequstPath(start : Vector2i, end : Vector2i):
+func RequestPath(start : Vector2i, end : Vector2i):
 	path = astar_grid.get_point_path(start,end)
 	
 	#下面这两行代码使得小人走在格子中间。但好像我不需要

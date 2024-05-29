@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name ItemManager
+
 var foodPrototypes = []
 var itemsInWorld = []
 
@@ -14,7 +16,8 @@ func _ready():
 	
 	SpawnItem(foodPrototypes[0],Vector2i(10,10))
 	SpawnItem(foodPrototypes[0],Vector2i(13,20))
-	SpawnItem(foodPrototypes[1],Vector2i(12,30))
+	SpawnItem(foodPrototypes[0],Vector2i(22,20))
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,9 +34,9 @@ func SpawnItem(item, pos):
 func World2BlockPosition(pos) -> Vector2:
 	return Vector2(pos.x * 16 + 8, pos.y * 16 + 8)
 	
-func FindNearstItem(itemCategory : ItemCategory, worldPosition: Vector2):
+func FindNearestItem(itemCategory : ItemCategory, worldPosition: Vector2):
 	if len(itemsInWorld) == 0:
-		return false
+		return null
 	
 	var nearestItem = null
 	var nearestDistance = 99999999
@@ -53,6 +56,10 @@ func FindNearstItem(itemCategory : ItemCategory, worldPosition: Vector2):
 				
 	return nearestItem
 	
+
+func RemoveItemFromWorld(item):
+	remove_child(item)
+	itemsInWorld.erase(item)
 
 func IsItemInCategory(item,itemCategory: ItemCategory) -> bool:
 	return item.is_in_group(itemCategories[itemCategory])
