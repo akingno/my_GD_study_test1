@@ -37,6 +37,18 @@ func OnReachedDestination():
 	OnFinishSubTask()
 	GetCurrentSubTask().targetItem = subTasks[currentSubTask - 1].targetItem
 	
+func InitFindAndHarvestTask(targetItem):
+	
+	var subTask = Task.new()
+	subTask.taskType = TaskType.WalkTo
+	subTask.targetItem = targetItem
+	subTasks.append(subTask)
+	
+	subTask = Task.new()
+	subTask.taskType = TaskType.Harvest
+	subTask.targetItem = targetItem
+	subTasks.append(subTask)
+	
 func InitFindAndEatFoodTask():
 	#创建一个找并且吃的task
 	taskName = "Find some food and eat"

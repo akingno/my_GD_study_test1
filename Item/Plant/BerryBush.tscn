@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://5ql41r472ir3"]
+
+[ext_resource type="Texture2D" uid="uid://c5vgfvcvd1pmn" path="res://object_tileset.png" id="1_knhoi"]
+[ext_resource type="Script" path="res://Item/Plant/BerryBush.gd" id="1_tdsy2"]
+[ext_resource type="Script" path="res://Item/Plant/clickTarget.gd" id="3_njhha"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5cac"]
+atlas = ExtResource("1_knhoi")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ix2fr"]
+size = Vector2(12, 12)
+
+[node name="BerryBush" type="Sprite2D"]
+texture = SubResource("AtlasTexture_r5cac")
+script = ExtResource("1_tdsy2")
+id = 3
+
+[node name="clickTarget" type="Area2D" parent="."]
+script = ExtResource("3_njhha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="clickTarget"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ix2fr")

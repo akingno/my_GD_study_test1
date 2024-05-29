@@ -18,7 +18,8 @@ var inHand
 
 var foodNeed : float = 0.4
 var eatSpeed : float = 0.5
-var foodNeedDepleteSpeed : float = 0.05
+var foodNeedDepleteSpeed : float = 0.01
+
 
 
 func _process(delta):
@@ -27,11 +28,13 @@ func _process(delta):
 	hungerBar.value = foodNeed * 100 #用来显示百分比
 	
 	#如果当前任务未完成，就做当前任务
-	if currentTask != null:
+	if currentTask != null: #TODO:此处可能要设一个延迟去取消掉一些任务
 		DoCurrentTask(delta)
 	else:
 		if foodNeed < hungery_line:
 		#如果当前任务完成过了，就通过taskManager要求新任务
+			currentTask = taskManager.RequestFindAndEatFoodTask()
+		else:
 			currentTask = taskManager.RequestTask()
 
 func OnPickUpItem(item):
@@ -58,6 +61,7 @@ func DoCurrentTask(delta):
 		match subTask.taskType:
 			Task.TaskType.WalkTo:
 				if charController.HasReachedDestination():
+					print("Reached destination")
 					currentTask.OnReachedDestination()
 					OnFinishedSubTask()
 			Task.TaskType.Eat:
@@ -73,6 +77,14 @@ func DoCurrentTask(delta):
 				
 				currentTask.OnFinishSubTask()
 				OnFinishedSubTask()
+			
+			Task.TaskType.Harvest:
+				var targetItem = currentTask.GetCurrentSubTask().targetItem
+				if targetItem.TryHarvest(charController.harvestSkill * delta):
+					currentTask.OnFinishSubTask()
+					OnFinishedSubTask()
+				else:
+					print(targetItem.harvestProgress)
 	
 func StartCurrentSubTask(subTask):
 	print("Starting subtask: " + Task.TaskType.keys()[subTask.taskType])
@@ -81,7 +93,7 @@ func StartCurrentSubTask(subTask):
 		Task.TaskType.FindItem:
 			var targetItem = itemManeger.FindNearestItem(subTask.targetItemType, charController.position)
 			if targetItem == null:
-				print("no item, force task to finish")
+				#print("no item, force task to finish")
 				currentTask.Finish()
 			else:
 				currentTask.OnFoundItem(targetItem)
@@ -90,7 +102,8 @@ func StartCurrentSubTask(subTask):
 		
 		Task.TaskType.WalkTo:
 			charController.SetMoveTarget(subTask.targetItem.position)
-			#如果动作需要超过一帧
+			# 如果动作需要超过一帧
+			# 也就是，对于非即时性任务，通过设定为dosubtask中，来防止立马跳到下个任务
 			currentActtion = PawnAction.DoingSubTask
 			# OnFinishedSubTask()
 			
@@ -100,4 +113,9 @@ func StartCurrentSubTask(subTask):
 			OnFinishedSubTask()
 		
 		Task.TaskType.Eat:
+			# 此处也是，非即时性任务
+			currentActtion = PawnAction.DoingSubTask
+			
+		Task.TaskType.Harvest:
+			# 此处也是，非即时性任务
 			currentActtion = PawnAction.DoingSubTask

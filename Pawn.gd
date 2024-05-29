@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var itemManager = $"../ItemManager"
 
 const SPEED = 300.0
+var harvestSkill : float = 1
 
 var path = []
 
@@ -15,26 +16,32 @@ func SetMoveTarget(worldPos : Vector2):
 	path = pathfinding.RequestPath(pos,targetPos)
 	
 func HasReachedDestination():
+	#var pos = position / terrain.CELL_SIZE
+	#var targetPos = worldPos / terrain.CELL_SIZE
+	#if abs(pos.x -targetPos.x) < 0.5 and abs(pos.y -targetPos.y) < 0.5 and len(path) == 0:
+		##print(pos)
+		##print(targetPos)
+		#return true
+	#return false
 	return len(path) == 0
-	
 	
 
 
 func _physics_process(delta):
 	#delta:帧间隔时间
 	
-	if Input.is_action_just_pressed("right_click"):
-		var pos = position / terrain.CELL_SIZE
-		
-		var target_pos = get_global_mouse_position() / terrain.CELL_SIZE
-		
-		path = pathfinding.RequestPath(pos,target_pos)
-		
-	if Input.is_action_just_pressed("ui_accept"):
-		var pos = position / terrain.CELL_SIZE
-		
-		var target_pos = itemManager.FindNearestItem(itemManager.ItemCategory.FOOD, position).position / terrain.CELL_SIZE
-		path = pathfinding.RequstPath(pos,target_pos)
+	#if Input.is_action_just_pressed("right_click"):
+		#var pos = position / terrain.CELL_SIZE
+		#
+		#var target_pos = get_global_mouse_position() / terrain.CELL_SIZE
+		#
+		#path = pathfinding.RequestPath(pos,target_pos)
+		#
+	#if Input.is_action_just_pressed("ui_accept"):
+		#var pos = position / terrain.CELL_SIZE
+		#
+		#var target_pos = itemManager.FindNearestItem(itemManager.ItemCategory.FOOD, position).position / terrain.CELL_SIZE
+		#path = pathfinding.RequstPath(pos,target_pos)
 		
 	
 		

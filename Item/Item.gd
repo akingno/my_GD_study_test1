@@ -9,6 +9,9 @@ enum Modifier {None = -2, Trash = -1, Normal = 0, Good = 1, Matser = 2}
 @export var value : float
 @export var modifier : Modifier
 
+@onready var taskManager = $"../../TaskManager"
+@onready var itemManager = $"../../ItemManager"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
