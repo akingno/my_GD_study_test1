@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var terrain = $"../Terrain"
 @onready var pathfinding = $"../PathFinding"
+@onready var itemManager = $"../ItemManager"
 
 const SPEED = 300.0
 
@@ -16,6 +17,13 @@ func _physics_process(delta):
 		var target_pos = get_global_mouse_position() / terrain.CELL_SIZE
 		
 		path = pathfinding.RequstPath(pos,target_pos)
+		
+	if Input.is_action_just_pressed("ui_accept"):
+		var pos = position / terrain.CELL_SIZE
+		
+		var target_pos = itemManager.FindNearstItem(itemManager.ItemCategory.FOOD, position).position / terrain.CELL_SIZE
+		path = pathfinding.RequstPath(pos,target_pos)
+		
 	
 		
 	if(len(path) > 0):

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dncn0jjpoew3n"]
+[gd_scene load_steps=9 format=3 uid="uid://dncn0jjpoew3n"]
 
 [ext_resource type="Texture2D" uid="uid://d2fbail76xiea" path="res://tiletest1.png" id="1_emil0"]
 [ext_resource type="Script" path="res://Terrain.gd" id="2_as5sc"]
 [ext_resource type="Script" path="res://PathFinding.gd" id="3_4jo6t"]
 [ext_resource type="PackedScene" uid="uid://c204b8lqsupff" path="res://pawn.tscn" id="4_5tsgw"]
 [ext_resource type="Script" path="res://CameraController.gd" id="4_kcuhk"]
+[ext_resource type="Script" path="res://ItemManager.gd" id="6_amjla"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1k0ps"]
 texture = ExtResource("1_emil0")
@@ -65,3 +66,6 @@ zoom = Vector2(0.6, 0.6)
 script = ExtResource("4_kcuhk")
 
 [node name="Pawn" parent="." instance=ExtResource("4_5tsgw")]
+
+[node name="ItemManager" type="Node2D" parent="."]
+script = ExtResource("6_amjla")
