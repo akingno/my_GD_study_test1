@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dncn0jjpoew3n"]
+[gd_scene load_steps=13 format=3 uid="uid://dncn0jjpoew3n"]
 
 [ext_resource type="Texture2D" uid="uid://d2fbail76xiea" path="res://tiletest1.png" id="1_emil0"]
 [ext_resource type="Script" path="res://TaskManager.gd" id="1_evvwh"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://c204b8lqsupff" path="res://pawn.tscn" id="4_5tsgw"]
 [ext_resource type="Script" path="res://CameraController.gd" id="4_kcuhk"]
 [ext_resource type="Script" path="res://ItemManager.gd" id="6_amjla"]
+[ext_resource type="Script" path="res://UI.gd" id="8_l2awd"]
+[ext_resource type="Script" path="res://pnl_bottom.gd" id="9_18fmb"]
+[ext_resource type="Script" path="res://pnl_architect.gd" id="10_i55ce"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1k0ps"]
 texture = ExtResource("1_emil0")
@@ -77,3 +80,88 @@ offset_bottom = 27.0
 
 [node name="ItemManager" type="Node2D" parent="."]
 script = ExtResource("6_amjla")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("8_l2awd")
+
+[node name="pnl_bottom" type="Panel" parent="UI"]
+anchors_preset = -1
+anchor_top = 0.95
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("9_18fmb")
+
+[node name="btn_architect" type="Button" parent="UI/pnl_bottom"]
+layout_mode = 0
+anchor_right = 0.25
+anchor_bottom = 1.0
+text = "Architect"
+
+[node name="btn_work" type="Button" parent="UI/pnl_bottom"]
+layout_mode = 0
+anchor_left = 0.25
+anchor_right = 0.5
+anchor_bottom = 1.0
+text = "Work"
+
+[node name="btn_shcedule" type="Button" parent="UI/pnl_bottom"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.75
+anchor_bottom = 1.0
+text = "Schedule"
+
+[node name="btn_asssign" type="Button" parent="UI/pnl_bottom"]
+layout_mode = 0
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Assign"
+
+[node name="Architect" type="Panel" parent="UI"]
+visible = false
+anchors_preset = -1
+anchor_top = 0.85
+anchor_right = 0.2
+anchor_bottom = 0.95
+script = ExtResource("10_i55ce")
+
+[node name="btn_order" type="Button" parent="UI/Architect"]
+layout_mode = 0
+anchor_right = 0.5
+anchor_bottom = 0.5
+text = "Order"
+
+[node name="btn_zone" type="Button" parent="UI/Architect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+text = "Zone"
+
+[node name="btn_structure" type="Button" parent="UI/Architect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+text = "Structure"
+
+[node name="btn_production" type="Button" parent="UI/Architect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Production"
+
+[node name="pnl_buildable" type="Panel" parent="UI/Architect"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.056
+anchor_top = 0.088
+anchor_right = 4.93
+anchor_bottom = 0.823

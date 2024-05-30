@@ -13,3 +13,5 @@ This is my imitation of a video tutorial project on Youtube about simulating Rim
 
 5.30: <p>1.watch episode 6 and add harvest function and change some task dispatch logics
 <br> problem: 1.多次点击同一个树（多次对同一个树进行收获）使得收获任务多次出现，这个应该添加一个计数器解决（考虑点击位置所在的map格是否不同）
+<p>2. watch episode 7 and add UI and some buttons
+<br> problem: 1.点击structure后再点order之类的，panel_buildable不会刷新
